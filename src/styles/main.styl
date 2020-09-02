@@ -1,0 +1,33 @@
+body, html
+  height 100%
+  width 100%
+  font-size 12px
+
+.container
+  display flex
+  height inherit
+  width inherit
+  justify-content center
+  align-items center
+
+
+.headline-func-bar
+  display flex
+  flex 0 0 auto
+  flex-flow row nowrap
+  align-items center
+  margin 10px 0
+  &:first-child
+    margin-top 0
+  .headline
+    margin-right 20px
+    .heading
+      margin 0
+  .func-bar
+    display flex
+    & > *
+      margin 0
+      &:not(:last-child)
+        margin-right 10px
+    &-full
+      width 100%
