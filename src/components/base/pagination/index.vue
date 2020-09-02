@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="totalItems">
     <base-button :disabled="currentPage <= 1" @click="goToStart">
       start
     </base-button>
@@ -7,7 +7,8 @@
       prev
     </base-button>
     <base-input
-      v-model.number="currentPage"
+      :value="currentPage"
+      pattern="[0-9]+"
       @change="handleChange"
     />
     <base-button :disabled="!(currentPage < lastPage)" @click="goToNext">
@@ -43,27 +44,25 @@ export default {
   },
   methods: {
     goToStart() {
-      this.currentPage = 1
-      this.handleChange()
+      this.handleChange(1)
     },
     goToPrev() {
       if (this.currentPage > 1) {
-        this.currentPage--
-        this.handleChange()
+        this.handleChange(this.currentPage - 1)
       }
     },
     goToNext() {
       if (this.currentPage < this.lastPage) {
-        this.currentPage++
-        this.handleChange()
+        this.handleChange(this.currentPage + 1)
       }
     },
     goToEnd() {
-      this.currentPage = this.lastPage
-      this.handleChange()
+      this.handleChange(this.lastPage)
     },
-    handleChange() {
-      this.$emit("update:currentPage", this.currentPage)
+    handleChange(page) {
+      let newPage = isNaN(page) ? 1 : +page
+      newPage = newPage < 1 ? 1 : newPage > this.lastPage ? this.lastPage : newPage
+      this.$emit("update:currentPage", newPage)
     },
   },
 }

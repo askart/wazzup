@@ -1,14 +1,15 @@
 <template>
   <div>
     <base-table-data
-      :data="items | paginate(page.current, page.size)"
-      :size="size"
+      :items="items | paginate(page.current, page.size)"
+      :cols="cols"
+      :loading="loading" load-btn-text="Показать пользователей"
       @row-click="handleRowClick"
       @load="$emit('load')"
-    >
-      <slot/>
-    </base-table-data>
-    <base-pagination :total-items="items.length" :items-per-page.sync="page.size" :current-page.sync="page.current"/>
+    />
+    <template v-if="pageSize">
+      <base-pagination :total-items="items.length" :items-per-page.sync="page.size" :current-page.sync="page.current"/>
+    </template>
   </div>
 </template>
 <script>
@@ -24,9 +25,21 @@ export default {
       type: Array,
       default: () => [],
     },
+    "cols": {
+      type: Array,
+      default: () => [],
+    },
     "pageSize": {
       type: Number,
       default: 10,
+    },
+    "loading": {
+      type: Boolean,
+      default: false,
+    },
+    "loadBtnText": {
+      type: String,
+      default: "Загрузить",
     },
   },
   data() {
