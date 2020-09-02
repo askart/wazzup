@@ -4,7 +4,7 @@
       :items="tableData"
       :cols="cols"
       :loading="loading" load-btn-text="Показать пользователей"
-      :page-size="20"
+      :page-size="10"
       :exclusive-height="60 + 10 + 38 + 10 + 32 + 10"
       @load="getItems"
       @row-click="handleRowClick"
