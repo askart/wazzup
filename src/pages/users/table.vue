@@ -1,16 +1,31 @@
 <template>
-  <base-table
-    :items="tableData"
-    :loading="loading" load-btn-text="Показать пользователей"
-    :page-size="20"
-    :exclusive-height="60 + 10 + 38 + 10 + 32 + 10"
-    @load="getItems"
-  >
-    <base-table-column v-for="col in cols" :key="col.prop" :prop="col.prop" :label="col.label"/>
-  </base-table>
+  <div>
+    <base-table
+      :items="tableData"
+      :loading="loading" load-btn-text="Показать пользователей"
+      :page-size="20"
+      :exclusive-height="60 + 10 + 38 + 10 + 32 + 10"
+      @load="getItems"
+      @row-click="handleRowClick"
+    >
+      <base-table-column v-for="col in cols" :key="col.prop" :prop="col.prop" :label="col.label"/>
+    </base-table>
+    <base-modal :visible="visible" @close="visible = false">
+      <div>
+        {{ item.fullname }}
+      </div>
+      <div>
+        {{ item.address.streetAddress }}
+      </div>
+      <div>
+        {{ item.address.city }}, {{ item.address.state }}, {{ item.address.zip }}
+      </div>
+    </base-modal>
+  </div>
 </template>
 <script>
 import {get} from "@/api/users"
+import {deepClone} from "@/lib/utils"
 
 export default {
   name: "UsersTable",
@@ -23,6 +38,7 @@ export default {
   data() {
     return {
       cols: [
+        {prop: "id", label: "ID"},
         {prop: "fullname", label: "Имя пользователя"},
         {prop: "uname", label: "Юзернейм"},
         {prop: "company", label: "Компания"},
@@ -32,6 +48,8 @@ export default {
       items: [],
       tableData: [],
       loading: false,
+      visible: false,
+      item: {},
     }
   },
   watch: {
@@ -55,12 +73,12 @@ export default {
         })
     },
     setItems(items = []) {
-      this.items = items
-      this.searchItems()
+      this.items = deepClone(items)
+      this.foundItems = this.searchItems(this.items)
     },
-    searchItems() {
+    searchItems(items) {
       let keys = ["fullname", "uname", "company", "email", "state"]
-      this.tableData = this.items
+      return items
         .filter(item => {
           return this.searchOptions.every(keyword => {
             let regex = new RegExp(keyword, "i")
@@ -69,6 +87,10 @@ export default {
             })
           })
         })
+    },
+    handleRowClick({id}) {
+      this.item = this.tableData.find(item => item.id == id)
+      this.visible = true
     },
   },
 }
