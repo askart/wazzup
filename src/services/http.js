@@ -1,10 +1,10 @@
 import axios from "axios"
 
-const TIMEOUT = 8 * 60 * 1000
-
+const TIMEOUT = 1 * 60 * 1000
+const SERVER_API_URL = "http://www.filltext.com/"
 
 let api = axios.create({
-  baseURL: SERVER_API_URL + "api/",
+  baseURL: SERVER_API_URL,
   timeout: TIMEOUT,
   responseType: "json",
   headers: {

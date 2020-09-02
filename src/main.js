@@ -1,7 +1,6 @@
 import Vue from "vue"
 import App from "@/App.vue"
-// reset styles
-import "normalize.css"
+import "@/ui"
 
 new Vue({
   el: "#app",
