@@ -1,13 +1,13 @@
 <template>
-  <div v-if="visible" class="modal-backdrop" @click="close">
-    <div class="modal" @keyup.esc="close">
-      <base-button type="text" class="modal-btn-close" @click="close">
+  <div v-if="visible" class="base-modal-backdrop" @click="close">
+    <div class="base-modal" @keyup.esc="close">
+      <base-button type="text" class="base-modal-btn-close" @click="close">
         <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <line x1="0" y1="0" x2="10" y2="10" stroke="#000" stroke-width="1"/>
           <line x1="10" y1="0" x2="0" y2="10" stroke="#000" stroke-width="1"/>
         </svg>
       </base-button>
-      <div class="modal-content">
+      <div class="base-modal-content">
         <slot/>
       </div>
     </div>
@@ -31,7 +31,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.modal-backdrop
+.base-modal-backdrop
   position fixed
   left 0
   top 0
@@ -42,7 +42,7 @@ export default {
   z-index 10000
   background-color rgba(0,0,0,0.5)
 
-.modal
+.base-modal
   position absolute
   left calc(50% - 200px / 2)
   top calc(40% - 200px / 2)

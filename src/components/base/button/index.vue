@@ -51,10 +51,10 @@ button.base-btn:active {
     transform: scale(0.99);
 }
 
-button:disabled,
-button[disabled]{
-  border: 1px solid darken(#ccc, 10%) !important;
-  background-color: #ccc !important;
-  color: #555 !important;
+button.base-btn:disabled,
+button.base-btn[disabled]{
+  border: 1px solid darken(#ccc, 10%);
+  background-color: #ccc;
+  color: #555;
 }
 </style>
