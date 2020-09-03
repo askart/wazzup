@@ -3,7 +3,7 @@
     <base-table
       :items="tableData"
       :cols="cols"
-      :loading="loading" load-btn-text="Показать пользователей"
+      :loading="loading" load-btn-text="Load users data"
       :page-size="10"
       :exclusive-height="60 + 10 + 38 + 10 + 32 + 10"
       width="960px"
@@ -39,11 +39,11 @@ export default {
   data() {
     return {
       cols: [
-        {prop: "fullname", label: "Имя пользователя"},
-        {prop: "uname", label: "Юзернейм"},
-        {prop: "company", label: "Компания"},
-        {prop: "email", label: "Почта"},
-        {prop: "addressState", label: "Штат"},
+        {prop: "fullname", label: "Full name"},
+        {prop: "uname", label: "Username"},
+        {prop: "company", label: "Company"},
+        {prop: "email", label: "Email"},
+        {prop: "addressState", label: "State"},
       ],
       items: [],
       tableData: [],

@@ -3,7 +3,7 @@
     <base-table-data
       :items="items | sort(sortOptions) | paginate(page.current, page.size)"
       :cols="cols"
-      :loading="loading" load-btn-text="Показать пользователей"
+      :loading="loading" :load-btn-text="loadBtnText"
       :width="width"
       @row-click="handleRowClick"
       @load="$emit('load')"
@@ -43,7 +43,7 @@ export default {
     },
     "loadBtnText": {
       type: String,
-      default: "Загрузить",
+      default: "Load",
     },
     "width": {
       type: String,

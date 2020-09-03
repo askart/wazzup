@@ -3,7 +3,7 @@
     v-model="searchStr"
     :minlength="searchMin" :maxlength="searchMax"
     width="960px"
-    placeholder="С помощью поиска можно фильтровать данные."
+    placeholder="Search"
     @input="applySearch"
   />
 </template>
