@@ -87,6 +87,7 @@ export default {
         this.sortOptions.order *= -1
       } else {
         this.sortOptions.key = key
+        this.sortOptions.order = 1
       }
     }
   },

@@ -6,6 +6,9 @@
           <tr>
             <th v-for="(col, colIndex) in cols" :key="colIndex" :style="`width: ${col.width}`" @click="handleSort(col)">
               {{ col.label }}
+              <i v-if="sortOptions.key == col.prop" class="base-table__sort-icon">
+                {{ sortOptions.order === 1 ? "&#9650;" : "&#9660;" }}
+              </i>
             </th>
           </tr>
         </thead>
@@ -51,11 +54,25 @@ export default {
       default: "",
     },
   },
+  data() {
+    return {
+      sortOptions: {
+        key: "",
+        order: 1,
+      },
+    }
+  },
   methods: {
     handleLoad() {
       this.$emit("load")
     },
     handleSort({prop}) {
+      if (this.sortOptions.key == prop) {
+        this.sortOptions.order *= -1
+      } else {
+        this.sortOptions.key = prop
+        this.sortOptions.order = 1
+      }
       this.$emit("sort", prop)
     },
     handleRowClick(row, rowIndex) {
@@ -87,6 +104,7 @@ table.base-table {
 
       td {
         color: #555;
+        cursor: help;
       }
     }
   }
@@ -107,4 +125,16 @@ table.base-table {
     }
   }
 }
+.base-table
+  th
+    position relative
+    user-select none
+    cursor pointer
+  &__sort-icon
+    position absolute
+    top 1rem
+    right 0.5rem
+    font-size 1rem
+    color #fff
+
 </style>

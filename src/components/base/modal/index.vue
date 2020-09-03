@@ -1,10 +1,10 @@
 <template>
-  <div v-if="visible" class="base-modal-backdrop" @click="close">
-    <div class="base-modal" @keyup.esc="close">
-      <base-button type="text" class="base-modal-btn-close" @click="close">
-        <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <line x1="0" y1="0" x2="10" y2="10" stroke="#000" stroke-width="1"/>
-          <line x1="10" y1="0" x2="0" y2="10" stroke="#000" stroke-width="1"/>
+  <div v-if="visible" class="base-modal-backdrop" @click.self.once="close">
+    <div class="base-modal">
+      <base-button type="text" class="base-modal-btn-close" @click.once="close">
+        <svg viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <line x1="0" y1="0" x2="15" y2="15" stroke="#000" stroke-width="1"/>
+          <line x1="15" y1="0" x2="0" y2="15" stroke="#000" stroke-width="1"/>
         </svg>
       </base-button>
       <div class="base-modal-content">
@@ -23,9 +23,31 @@ export default {
       default: false,
     },
   },
+  watch: {
+    visible: {
+      handler: function (val) {
+        if (val) {
+          this.$nextTick(() => {
+            window.addEventListener("keydown", this.closeOnEsc)
+          })
+        } else {
+          window.removeEventListener("keydown", this.closeOnEsc)
+        }
+      },
+      immediate: true
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener("keydown", this.closeOnEsc)
+  },
   methods: {
     close() {
       this.$emit("close")
+    },
+    closeOnEsc(e) {
+      if (e.key === "Escape") {
+        this.close()
+      }
     },
   },
 }
@@ -44,24 +66,35 @@ export default {
 
 .base-modal
   position absolute
-  left calc(50% - 200px / 2)
-  top calc(40% - 200px / 2)
-  width 200px
+  line-height 2rem
+  font-size 1.5rem
+  left calc(50% - 400px / 2)
+  top 30%
+  width 400px
   height fit-content
   background-color #fff
-  padding 10px 10px 10px
+  padding 30px 30px 20px
+  box-sizing border-box
   &-btn-close
     position absolute
     border none
     background transparent
     padding 0
-    height 10px
-    width 10px
-    right 10px
-    top 10px
+    height 15px
+    width 15px
+    right 15px
+    top 15px
+    cursor pointer
     &:active, &:focus
       outline none
+    & > *
+      position absolute
+      right 0
+      top 0
+
   &-content
     position relative
-    margin-top 10px
+    padding-top 5px
+    padding-right 5px
+
 </style>

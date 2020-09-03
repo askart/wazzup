@@ -36,6 +36,7 @@ button.base-btn {
     transition: background 250ms ease-in-out, transform 150ms ease;
     -webkit-appearance: none;
     -moz-appearance: none;
+    user-select: none;
 }
 
 button.base-btn:hover,
