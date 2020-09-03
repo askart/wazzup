@@ -1,8 +1,11 @@
 <template>
   <div v-if="visible" class="modal-backdrop" @click="close">
     <div class="modal" @keyup.esc="close">
-      <base-button class="modal-btn-close" @click="close">
-        Close
+      <base-button type="text" class="modal-btn-close" @click="close">
+        <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <line x1="0" y1="0" x2="10" y2="10" stroke="#000" stroke-width="1"/>
+          <line x1="10" y1="0" x2="0" y2="10" stroke="#000" stroke-width="1"/>
+        </svg>
       </base-button>
       <div class="modal-content">
         <slot/>
@@ -40,18 +43,25 @@ export default {
   background-color rgba(0,0,0,0.5)
 
 .modal
-  position fixed
-  left 50%
-  top 50%
-  width 250px
-  height 250px
-  padding 10px
+  position absolute
+  left calc(50% - 200px / 2)
+  top calc(40% - 200px / 2)
+  width 200px
+  height fit-content
+  background-color #fff
+  padding 10px 10px 10px
   &-btn-close
     position absolute
+    border none
+    background transparent
+    padding 0
+    height 10px
+    width 10px
     right 10px
     top 10px
+    &:active, &:focus
+      outline none
   &-content
     position relative
     margin-top 10px
-
 </style>

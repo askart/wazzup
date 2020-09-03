@@ -2,6 +2,7 @@
   <base-input
     v-model="searchStr"
     :minlength="searchMin" :maxlength="searchMax"
+    width="960px"
     placeholder="С помощью поиска можно фильтровать данные."
     @input="applySearch"
   />

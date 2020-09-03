@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div class="headline-func-bar">
-      <div class="func-bar" style="width: 100%">
-        <users-search @apply="applySearch"/>
-      </div>
+    <div class="search-bar">
+      <users-search @apply="applySearch"/>
     </div>
     <users-table :search-options="searchOptions"/>
   </div>
@@ -31,3 +29,11 @@ export default {
   },
 }
 </script>
+<style lang="stylus" scoped>
+.search-bar
+  display flex
+  flex 0 0 auto
+  flex-flow row nowrap
+  align-items center
+  margin 0 0 10px
+</style>

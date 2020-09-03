@@ -1,5 +1,5 @@
 <template>
-  <div v-if="totalItems">
+  <div v-if="totalItems" class="base-pagination">
     <base-button :disabled="currentPage <= 1" @click="goToStart">
       start
     </base-button>
@@ -8,6 +8,7 @@
     </base-button>
     <base-input
       :value="currentPage"
+      width="55px"
       pattern="[0-9]+"
       @change="handleChange"
     />
@@ -67,3 +68,13 @@ export default {
   },
 }
 </script>
+<style lang="stylus" scoped>
+.base-pagination
+  display flex
+  flex-flow row nowrap
+  align-items center
+  justify-content center
+  & > *:not(:first-child)
+    margin-left 3px
+
+</style>

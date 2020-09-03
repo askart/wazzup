@@ -1,16 +1,16 @@
 <template>
-  <div>
-    <div v-if="items.length">
-      <table>
+  <div :style="width ? `width: ${width}` : ''">
+    <div v-if="items.length" class="base-table-container">
+      <table class="base-table">
         <thead>
           <tr>
-            <th v-for="(col, colIndex) in cols" :key="colIndex">
+            <th v-for="(col, colIndex) in cols" :key="colIndex" @click="handleSort(col)">
               {{ col.label }}
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, itemIndex) in items" :key="itemIndex">
+          <tr v-for="(item, itemIndex) in items" :key="itemIndex" @click="handleRowClick(item, itemIndex)">
             <td v-for="(col, colIndex) in cols" :key="colIndex">
               {{ item[col.prop] }}
             </td>
@@ -18,7 +18,7 @@
         </tbody>
       </table>
     </div>
-    <div v-else>
+    <div v-else style="width: 100%">
       <base-button @click="handleLoad">
         {{ loadBtnText }}
       </base-button>
@@ -46,16 +46,31 @@ export default {
       type: String,
       default: "Загрузить",
     },
+    "width": {
+      type: String,
+      default: "",
+    },
   },
   methods: {
     handleLoad() {
       this.$emit("load")
     },
+    handleSort({prop}) {
+      this.$emit("sort", prop)
+    },
+    handleRowClick(row, rowIndex) {
+      this.$emit("row-click", {row, rowIndex})
+    },
   },
 }
 </script>
 <style lang="stylus" scoped>
-table {
+.base-table-container
+  width 100%
+  overflow auto
+
+table.base-table {
+  width: 100%;
   font-family: 'Arial';
   margin: 25px auto;
   border-collapse: collapse;
@@ -84,6 +99,7 @@ table {
     background: #00cccc;
     color: #fff;
     text-transform: uppercase;
+    text-align left
     font-size: 12px;
     &.last {
       border-right: none;
