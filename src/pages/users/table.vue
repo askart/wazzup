@@ -39,11 +39,11 @@ export default {
   data() {
     return {
       cols: [
-        {prop: "fullname", label: "Full name"},
-        {prop: "uname", label: "Username"},
-        {prop: "company", label: "Company"},
-        {prop: "email", label: "Email"},
-        {prop: "addressState", label: "State"},
+        {prop: "fullname", label: "Full name", width: "22%"},
+        {prop: "uname", label: "Username", width: "20%"},
+        {prop: "company", label: "Company", width: "23%"},
+        {prop: "email", label: "Email", width: "25%"},
+        {prop: "addressState", label: "State", width: "10%"},
       ],
       items: [],
       tableData: [],

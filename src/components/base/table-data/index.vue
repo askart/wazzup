@@ -4,7 +4,7 @@
       <table class="base-table">
         <thead>
           <tr>
-            <th v-for="(col, colIndex) in cols" :key="colIndex" @click="handleSort(col)">
+            <th v-for="(col, colIndex) in cols" :key="colIndex" :style="`width: ${col.width}`" @click="handleSort(col)">
               {{ col.label }}
             </th>
           </tr>
@@ -70,6 +70,7 @@ export default {
   overflow auto
 
 table.base-table {
+  table-layout: fixed;
   width: 100%;
   font-family: 'Arial';
   margin: 25px auto;
@@ -92,15 +93,15 @@ table.base-table {
   th, td {
     color: #999;
     border: 1px solid #eee;
-    padding: 12px 35px;
+    padding: 1rem 1.5rem;
     border-collapse: collapse;
   }
   th {
     background: #00cccc;
     color: #fff;
     text-transform: uppercase;
-    text-align left
-    font-size: 12px;
+    text-align: left;
+    font-size: 1rem;
     &.last {
       border-right: none;
     }
