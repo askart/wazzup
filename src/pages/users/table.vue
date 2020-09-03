@@ -4,8 +4,8 @@
       :items="tableData"
       :cols="cols"
       :loading="loading" load-btn-text="Load users data"
+      :data-loaded="dataLoaded"
       :page-size="10"
-      :exclusive-height="60 + 10 + 38 + 10 + 32 + 10"
       width="960px"
       @load="getItems"
       @row-click="handleRowClick"
@@ -47,6 +47,7 @@ export default {
       ],
       items: [],
       tableData: [],
+      dataLoaded: false,
       loading: false,
       visible: false,
       item: {},
@@ -63,6 +64,8 @@ export default {
       get()
         .then(data => {
           this.setItems(data)
+          this.dataLoaded = true
+          this.$emit("load")
         })
         .catch((e) => {
           this.setItems()

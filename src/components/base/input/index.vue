@@ -38,4 +38,10 @@ input.base-input
   margin 0
   &:focus
     outline none
+  &:disabled, &[disabled]
+    border 1px solid darken(#ccc, 10%)
+    background-color #ccc
+    color #555
+    cursor not-allowed
+
 </style>

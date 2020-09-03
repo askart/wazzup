@@ -21,10 +21,28 @@
         </tbody>
       </table>
     </div>
-    <div v-else style="width: 100%">
-      <base-button @click="handleLoad">
-        {{ loadBtnText }}
-      </base-button>
+    <div v-else style="width: 100%;">
+      <table class="base-table">
+        <thead>
+          <tr>
+            <th style="width: 100%;"/>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="height: 450px; text-align: center; box-sizing: border-box;">
+              <template v-if="dataLoaded">
+                No data
+              </template>
+              <template v-else>
+                <base-button :disabled="loading" @click="handleLoad">
+                  {{ loadBtnText }}
+                </base-button>
+              </template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -48,6 +66,10 @@ export default {
     "loadBtnText": {
       type: String,
       default: "Загрузить",
+    },
+    "dataLoaded": {
+      type: Boolean,
+      default: false,
     },
     "width": {
       type: String,

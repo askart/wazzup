@@ -4,6 +4,7 @@
       :items="items | sort(sortOptions) | paginate(page.current, page.size)"
       :cols="cols"
       :loading="loading" :load-btn-text="loadBtnText"
+      :data-loaded="dataLoaded"
       :width="width"
       @row-click="handleRowClick"
       @load="$emit('load')"
@@ -44,6 +45,10 @@ export default {
     "loadBtnText": {
       type: String,
       default: "Load",
+    },
+    "dataLoaded": {
+      type: Boolean,
+      default: false,
     },
     "width": {
       type: String,

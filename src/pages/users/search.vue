@@ -4,6 +4,7 @@
     :minlength="searchMin" :maxlength="searchMax"
     width="960px"
     placeholder="Search"
+    :disabled="disabled"
     @input="applySearch"
   />
 </template>
@@ -12,6 +13,12 @@ import {escapeStringRegexp} from "@/lib/utils"
 
 export default {
   name: "UsersSearch",
+  props: {
+    "disabled": {
+      type: Boolean,
+      default: true,
+    },
+  },
   data() {
     return {
       searchStr: "",

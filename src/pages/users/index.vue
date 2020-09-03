@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="search-bar">
-      <users-search @apply="applySearch"/>
+      <users-search :disabled="!dataLoaded" @apply="applySearch"/>
     </div>
-    <users-table :search-options="searchOptions"/>
+    <users-table :search-options="searchOptions" @load="dataLoaded = true"/>
   </div>
 </template>
 
@@ -19,6 +19,7 @@ export default {
   },
   data() {
     return {
+      dataLoaded: false,
       searchOptions: [],
     }
   },

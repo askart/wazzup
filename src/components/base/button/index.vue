@@ -57,5 +57,6 @@ button.base-btn[disabled]{
   border: 1px solid darken(#ccc, 10%);
   background-color: #ccc;
   color: #555;
+  cursor: not-allowed;
 }
 </style>
